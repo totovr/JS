@@ -1,0 +1,48 @@
+body{
+    font-family: helvetica;
+    margin:0;
+    padding:0;
+    font-size: 20px;
+    background:url(background.png)
+}
+
+h1{
+    background:#4cd964;
+    margin: 0 0 30px 0;
+    padding: 10px;
+    color:#ffffff;
+}
+input{
+    display:block;
+    margin: 10px 0;
+    height: 30px;
+    color:#666;
+}
+
+.contents{
+    padding: 30px;
+    background:rgba(0,0,0,.7);
+    border: solid 1px silver;
+    width: 300px;
+    margin:auto;
+    border-radius: 10px;
+    color:#fff;
+}
+label{
+    font-size: 25px
+}
+button{
+    padding: 8px;
+    width:265px;
+}
+
+#resultOfTheExchange{
+    padding: 30px;
+    background:rgba(255,0,0,.7);
+    border: solid 1px silver;
+    width: 300px;
+    margin:auto;
+    border-radius: 10px;
+    color:#fff;
+    text-align:center;
+}

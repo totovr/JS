@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Exchange rate</title>
+        <link href="normalize.css" rel="stylesheet" >
+        <link href="base.css" rel="stylesheet" >
+
+    </head>
+<body>
+
+  <h1>Exchange rate of coins</h1>
+
+  <div class="contents">
+
+      <label>Amount:</label>
+      <input id="dollars" type="number" placeholder="Amount of dollars">
+
+        <button onclick="changeCoin('yen')">
+            Exchange to Yen
+        </button>
+
+        <button onclick="changeCoin('euro')">
+            Exchange to Euro
+        </button>
+
+  </div>
+
+  <div id="resultOfTheExchange">
+  </div>
+
+
+
+<script src="practica2.js"></script>
+</body>
+
+</html>
