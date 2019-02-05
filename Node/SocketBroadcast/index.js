@@ -11,13 +11,14 @@ var SERVER_PORT = 8081;               // port number for the webSocket server
 var wss = new WebSocketServer({ port: SERVER_PORT }); // the webSocket server
 var connections = new Array;          // list of connections to the server
 
-// Events
+// Events for the serial reading
 myPort.pipe(parser); // pipe the serial stream to the parser
 myPort.on('open', showPortOpen);
 parser.on('data', readSerialData);
 myPort.on('close', showPortClose);
 myPort.on('error', showError);
 
+// Event for the socket connection 
 wss.on('connection', handleConnection);
 
 function handleConnection(client) {
