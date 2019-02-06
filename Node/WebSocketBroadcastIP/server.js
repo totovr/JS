@@ -21,21 +21,24 @@ myPort.on('error', showError);
 
 const http = require('http');
 const WebSocket = require('ws');
-var sensorData;
-var fs = require('fs');
-const server = http.createServer(function handler(req, res) {
+
+const server = http.createServer(function (req, res) {
    if (req.url === '/' || req.url === '/index.html') {
-     res.writeHead(200, { 'Content-Type': 'text/html' });
-     res.write('<title>Serial connection</title>');
-     res.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>');
-     res.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.js"></script>');
-     res.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.js"></script>');
-     res.write('<script type="text/javascript" src="client.js"></script>');
-     res.end(/* index.html contents */);
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      res.write('<title>Serial connection</title>');
+      res.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>');
+      res.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.js"></script>');
+      res.write('<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.js"></script>');
+      res.write('<script type="text/javascript" src="client.js"></script>');
+      res.end(/* index.html contents */);
    } else if (req.url === '/client.js') {
-     res.writeHead(200, { 'Content-Type': 'application/javascript; charset=utf-8' });
-     res.write('var text;     var socket = new WebSocket("ws://localhost:8081"); var value;');
-     res.end(/* client.js contents */);
+      res.writeHead(200, { 'Content-Type': 'application/javascript; charset=utf-8' });
+      res.write('var text;     var socket = new WebSocket("ws://localhost:8081"); var value;');
+      res.write('function setup() { createCanvas(1200, 100); socket.onopen = openSocket; socket.onmessage = showData; text = createDiv("Sensor reading: "); text.position(40, 50);}');
+      res.write('function draw() { if (value == 0) { background(120); } else if (value == 1023) { background(220); }}');
+      res.write('function openSocket() { text.html("Socket open"); socket.send("Hello server"); }');
+      res.write('function showData(result) { value = map(result.data, 0, 4095, 0, 1023); text.html("Sensor reading: " + value); var xPos = int(value); if (xPos != 0) { text.position(xPos, 50); } else if (xPos == 0) { text.position(xPos + 40, 50); } }');
+      res.end(/* client.js contents */);
    }
 });
 
